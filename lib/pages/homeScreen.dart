@@ -9,11 +9,14 @@ import 'package:mvp_app/pages/filteredList.dart';
 import 'package:mvp_app/services/service.dart';
 import 'package:mvp_app/widgets/widgets.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../components/404.dart';
 import '../components/jobPositions.dart';
 import '../components/postListings.dart';
 import '../components/rentalHouses.dart';
 import '../constant/styles/colors.dart';
 import '../constant/styles/fonts.dart';
+import '../models/apiResponse.dart';
+import '../services/user_service.dart';
 import 'login.dart';
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,22 +45,16 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _loadData();
+    getHouseData();
+    getJobsData();
     setUserData();
   }
 
   List<dynamic> _house = [];
   List<dynamic> _job = [];
-  List<dynamic> _recomendded = [];
+  bool _isHouseLoaded = false;
+  bool _isJobLoaded = false;
 
-  Future<void> _loadData() async {
-    List<dynamic> houseData = await Service.getHouseData(context);
-    List<dynamic> jobData = await Service.getJobsData(context);
-    setState(() {
-      _house = houseData;
-      _job = jobData;
-    });
-  }
   late List<Widget>  pages =[
     RentalHouses(house: _house),
     JobPositions(list: _job),
@@ -65,11 +62,53 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   bool _isRental = true;
    int currentIndex =0;
-  void setFilter(house, jobs){
+
+    Future<void> getHouseData() async {
     setState(() {
-      _house=house;
-      _job=jobs;
+      _isHouseLoaded=true;
     });
+    ApiResponse houseResponse = await fetchHouseData();
+    if(houseResponse.error == null){
+      List<dynamic> houseList = houseResponse.data as List<dynamic>;
+      setState(() {
+        _house = houseList;
+        _isHouseLoaded=false;
+      });
+    }else if(houseResponse.error == '404'){
+      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> Error404()));
+      setState(() {
+        _isHouseLoaded=false;
+      });
+    }else{
+      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> Error404()));
+      setState(() {
+        _isHouseLoaded=false;
+      });
+    }
+  }
+
+    Future<void> getJobsData() async {
+    setState(() {
+      _isJobLoaded = true;
+    });
+    ApiResponse jobResponse = await fetchJobData();
+    if(jobResponse.error == null){
+      List<dynamic> jobList = jobResponse.data as List<dynamic>;
+      setState(() {
+        _job = jobList;
+        _isJobLoaded = false;
+      });
+    }else if(jobResponse.error == '404'){
+      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> Error404()));
+     setState(() {
+       _isJobLoaded = false;
+     });
+    }else{
+      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> Error404()));
+     setState(() {
+       _isJobLoaded = false;
+     });
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -121,46 +160,8 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       drawer: const NavigationMenu(),
-      body: (_house.isEmpty && _job.isEmpty) ? Center(
-        child: Container(
-          height: 230,
-          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(5)),
-            color: Colors.deepOrange,
-          ),
-          child: Column(
-            children: [
-              Text('Hello, welcome! There are no available listings at the moment. Please create an account and create your own listings..', style: MyText.subtitle(context)!
-                  .copyWith(color: Colors.white, fontSize: 18), textAlign: TextAlign.center,),
-              SizedBox(height: 15,),
-              Padding(
-                padding: const EdgeInsets.all( 8.0),
-                child: Container(
-                  width: double.maxFinite,
-                  margin: EdgeInsets.only(left: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5), // Set the border radius
-                    color: MyColors.grey_5, // Set the background color
-                  ),
-                  child: ElevatedButton(
-                    onPressed: () async{
-                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const Login()));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.transparent,
-                      foregroundColor: Colors.white,// Make the button background transparent
-                      elevation: 0, // Remove button elevation
-                    ),
-
-                    child: Text('Get Started',style: MyText.subtitle(context)!
-                        .copyWith(color: Colors.black)),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),) : DefaultTabController(
+      body:(_isJobLoaded || _isHouseLoaded) ? Center(child: CircularProgressIndicator(),) : (_house.isNotEmpty && _job.isNotEmpty) ?
+      DefaultTabController(
         length: 3,
         child: ListView(
           padding: EdgeInsets.all(8),
@@ -203,7 +204,46 @@ class _HomeScreenState extends State<HomeScreen> {
             pages[currentIndex],
           ],
         )
-      ),
+      ) : Center(
+        child: Container(
+          height: 230,
+          padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(5)),
+            color: Colors.deepOrange,
+          ),
+          child: Column(
+            children: [
+              Text('Hello, welcome! There are no available listings at the moment. Please create an account and create your own listings..', style: MyText.subtitle(context)!
+                  .copyWith(color: Colors.white, fontSize: 18), textAlign: TextAlign.center,),
+              SizedBox(height: 15,),
+              Padding(
+                padding: const EdgeInsets.all( 8.0),
+                child: Container(
+                  width: double.maxFinite,
+                  margin: EdgeInsets.only(left: 5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5), // Set the border radius
+                    color: MyColors.grey_5, // Set the background color
+                  ),
+                  child: ElevatedButton(
+                    onPressed: () async{
+                      Navigator.of(context).push(MaterialPageRoute(builder: (_)=> const Login()));
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      foregroundColor: Colors.white,// Make the button background transparent
+                      elevation: 0, // Remove button elevation
+                    ),
+
+                    child: Text('Get Started',style: MyText.subtitle(context)!
+                        .copyWith(color: Colors.black)),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),),
     );
   }
 }

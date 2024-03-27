@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mvp_app/constant/styles/colors.dart';
 class Widgets{
   static Widget menuButton(openMenu){
     return Padding(
@@ -24,5 +25,32 @@ class Widgets{
     );
   }
 
-
+ static Widget TextFildWidget(controller, hint, type, isPass){
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: TextField(
+        controller: controller,
+        obscureText: isPass,
+        keyboardType: type,
+        decoration: InputDecoration(
+          prefixIcon: const Icon(Icons.lock , color: MyColors.iconColor,),
+          enabledBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: MyColors.textColor1,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(
+              color: MyColors.textColor1,
+            ),
+            borderRadius: BorderRadius.circular(5),
+          ),
+          contentPadding: EdgeInsets.all(10),
+          hintText: '$hint',
+          hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
+        ),
+      ),
+    );
+}
 }

@@ -22,7 +22,6 @@ class RentalHouses extends StatefulWidget {
 
 class _RentalHousesState extends State<RentalHouses> {
   String user_id ='';
-  String _token = '';
 
   void setUserData() async {
     SharedPreferences  prefs = await SharedPreferences.getInstance();
@@ -30,7 +29,6 @@ class _RentalHousesState extends State<RentalHouses> {
     String token = prefs.getString('token') ?? '';
     setState(() {
       user_id = userId;
-      _token = token;
     });
   }
 

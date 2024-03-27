@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:mvp_app/constant/apiUrl.dart';
 import 'package:mvp_app/models/jobs.dart';
+import 'package:mvp_app/models/user.dart';
 import '../models/apiResponse.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -322,4 +323,31 @@ Future<ApiResponse> logout() async{
     print('$something $e');
   }
   return logoutResponse;
+}
+
+Future<ApiResponse> fetchUser() async {
+  ApiResponse userResponse = ApiResponse();
+  try{
+    SharedPreferences  prefs = await SharedPreferences.getInstance();
+    String token = prefs.getString('token') ?? '';
+    String id = prefs.getString('user_id') ?? '';
+    final response = await http.get(Uri.parse('$getUserUrl/$id'),
+
+        headers: { "Authorization": "Bearer $token"}
+    );
+    switch(response.statusCode){
+      case 200:
+        userResponse.data = List<User>.from(jsonDecode(response.body).map((x) => User.fromJson(x)));
+        break;
+      case 404:
+        userResponse.error = error404;
+        break;
+      default:
+        userResponse.error = something;
+    }
+  }catch(e){
+    print('Error :$e');
+    userResponse.error = something;
+  }
+  return userResponse;
 }

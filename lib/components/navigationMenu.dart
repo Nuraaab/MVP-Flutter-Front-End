@@ -16,15 +16,12 @@ import '../pages/postJobs.dart';
 import 'package:mvp_app/components/snackbar.dart';
 class NavigationMenu extends StatefulWidget {
   const NavigationMenu({super.key});
-
   @override
   State<NavigationMenu> createState() => _NavigationMenuState();
 }
-
 class _NavigationMenuState extends State<NavigationMenu> {
   String user_data = '';
   String _name = '';
-  String _profile = '';
   String user_id ='';
   String fileName = '';
   void setUserData() async {
@@ -36,16 +33,20 @@ class _NavigationMenuState extends State<NavigationMenu> {
       user_id = userId;
       _isLoggedIn = isLoggedIn;
       user_data = storedData;
-      if(_isLoggedIn){
-        _name = user_data.split(',')[1].split(':')[1].trim();
-        _profile = user_data.split('profile:')[1].split(',')[0].trim();
-        if (_profile.endsWith('}')) {
-          _profile = _profile.substring(0, _profile.length - 1);
-        }
-        print('$user_data , $_profile');
-      }
-
     });
+  }
+  List<dynamic> _user = [];
+  void getUserData() async {
+    ApiResponse userResponse = await fetchUser();
+    if(userResponse.error == null){
+      List<dynamic> userList = userResponse.data as List<dynamic>;
+      setState(() {
+        _user = userList;
+      });
+    }else{
+      snackBar.show(
+          context,"${userResponse.message}", Colors.red);
+    }
   }
    logoutUser(context) async {
     ApiResponse logoutResponse = await logout();
@@ -90,6 +91,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
   void initState() {
     super.initState();
     setUserData();
+      getUserData();
   }
   bool _isLoggedIn = false;
   @override
@@ -141,8 +143,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
                                             height: 100,
                                             child: CircleAvatar(
                                             radius: 30,
-                                            backgroundImage: _profile.isNotEmpty
-                                                ? NetworkImage('$getImageUrl/$_profile') as ImageProvider<Object>?
+                                            backgroundImage: _user.isNotEmpty
+                                                ? NetworkImage('$getImageUrl/${_user[0].profile}') as ImageProvider<Object>?
                                                 : AssetImage(Img.get('default.png')),
                                           ),
                                         ),

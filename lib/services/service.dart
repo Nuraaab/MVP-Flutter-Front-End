@@ -49,8 +49,8 @@ class Service {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       prefs.setString('token', userInfo.token ?? '');
       prefs.setString('user_id', userInfo.user_id ?? '');
-      prefs.setString('user', userInfo.data.toString() ?? '');
       prefs.setBool('isLoggedIn', true);
+      prefs.setString('user', userInfo.data.toString() ?? '');
     }else{
       snackBar.show(
           context,"${userInfo.message}", Colors.red);

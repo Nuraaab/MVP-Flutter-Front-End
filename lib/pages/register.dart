@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mvp_app/services/service.dart';
 import 'package:mvp_app/components/snackbar.dart';
+import 'package:mvp_app/widgets/widgets.dart';
 import '../constant/styles/colors.dart';
 import '../constant/styles/fonts.dart';
 import '../constant/styles/img.dart';
@@ -41,162 +42,12 @@ class _RegisterState extends State<Register> {
         child: Column(
           children: [
             SizedBox(height: 15,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _nameController,
-                obscureText: false,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Name',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _phoneController,
-                obscureText: false,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.call , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Phone Number',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _addressController,
-                obscureText: false,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.contact_mail , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Address',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _emailController,
-                obscureText: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.person , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Email',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _passwordController,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Password',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _confirmPasswordController,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Confirm Password',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
+            Widgets.TextFildWidget(_nameController, 'Name', TextInputType.text, false),
+            Widgets.TextFildWidget(_phoneController, 'Phone Number', TextInputType.text, false),
+            Widgets.TextFildWidget(_addressController, 'Address', TextInputType.text, false),
+            Widgets.TextFildWidget(_emailController, 'Email', TextInputType.emailAddress, false),
+            Widgets.TextFildWidget(_passwordController, 'Password', TextInputType.text, true),
+             Widgets.TextFildWidget(_confirmPasswordController, 'Confirm Password',TextInputType.text, true),
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.all( 8.0),
@@ -237,7 +88,6 @@ class _RegisterState extends State<Register> {
                 ),
               ),
             ),
-
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.all(8.0),

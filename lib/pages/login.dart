@@ -6,6 +6,7 @@ import 'package:mvp_app/pages/register.dart';
 import 'package:mvp_app/services/service.dart';
 import '../constant/styles/colors.dart';
 import '../constant/styles/fonts.dart';
+import '../widgets/widgets.dart';
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -41,58 +42,8 @@ class _LoginState extends State<Login> {
               color: Colors.grey[400],
             ),
             SizedBox(height: 15,),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: _emailController,
-                obscureText: false,
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.email_outlined , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Email',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left : 8.0, right: 8.0, top: 8.0),
-              child: TextField(
-                controller: _passwordController,
-                obscureText: true,
-                keyboardType: TextInputType.text,
-                decoration: InputDecoration(
-                  prefixIcon: const Icon(Icons.lock , color: MyColors.iconColor,),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                      color: MyColors.textColor1,
-                    ),
-                    borderRadius: BorderRadius.circular(35),
-                  ),
-                  contentPadding: EdgeInsets.all(10),
-                  hintText: 'Password',
-                  hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                ),
-              ),
-            ),
+            Widgets.TextFildWidget(_emailController, 'Email', TextInputType.emailAddress, false),
+            Widgets.TextFildWidget(_passwordController, 'Password', TextInputType.text, true),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

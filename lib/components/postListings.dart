@@ -22,7 +22,6 @@ class PostListing extends StatefulWidget {
 
 class _PostListingState extends State<PostListing> {
   String user_id ='';
-  String _token = '';
   bool _isLoggedIn = false;
     void postHouse(){
       showDialog(
@@ -61,7 +60,6 @@ class _PostListingState extends State<PostListing> {
   }
   String user_data = '';
  String _name = '';
- String _profile= '';
   void setUserData() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String userId = prefs.getString('user_id') ?? '';
@@ -70,22 +68,30 @@ class _PostListingState extends State<PostListing> {
     final storedData = prefs.getString('user') ?? '';
     setState(() {
       user_id = userId;
-      _token = token;
       _isLoggedIn = isLoggedIn;
       user_data = storedData;
-    if(_isLoggedIn){
-      _name = user_data.split(',')[1].split(':')[1].trim();
-      _profile = user_data.split('profile:')[1].split(',')[0].trim();
-      if (_profile.endsWith('}')) {
-        _profile = _profile.substring(0, _profile.length - 1);
-      }
-    }
+
     });
+  }
+  List<dynamic> _user = [];
+  void getUserData() async {
+
+    ApiResponse userResponse = await fetchUser();
+    if(userResponse.error == null){
+      List<dynamic> userList = userResponse.data as List<dynamic>;
+      setState(() {
+        _user = userList;
+      });
+    }else{
+      snackBar.show(
+          context,"${userResponse.message}", Colors.red);
+    }
   }
   @override
   void initState() {
     super.initState();
     setUserData();
+    getUserData();
   }
   @override
   Widget build(BuildContext context) {
@@ -110,8 +116,8 @@ class _PostListingState extends State<PostListing> {
                   .copyWith(color: Colors.white)),
                 trailing: CircleAvatar(
                   radius: 30,
-                  backgroundImage: _profile.isNotEmpty
-                      ? NetworkImage('$getImageUrl/$_profile') as ImageProvider<Object>?
+                  backgroundImage: _user.isNotEmpty
+                      ? NetworkImage('$getImageUrl/${_user[0].profile}') as ImageProvider<Object>?
                       : AssetImage(Img.get('default.png')),
                 ),
               ),

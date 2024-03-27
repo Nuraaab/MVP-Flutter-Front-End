@@ -6,6 +6,7 @@ import 'package:mvp_app/services/user_service.dart';
 
 import '../constant/styles/colors.dart';
 import '../constant/styles/fonts.dart';
+import '../widgets/widgets.dart';
 class EditHouses extends StatefulWidget {
  final String rentalId;
  final String title;
@@ -107,6 +108,7 @@ class _EditHousesState extends State<EditHouses> {
                       ),
                     ),
                   ),
+                  Widgets.TextFildWidget(_titleController, 'House Name', TextInputType.text, false),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(

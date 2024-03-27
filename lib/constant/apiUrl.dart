@@ -14,5 +14,6 @@ const updateJobUrl = '$baseUrl/jobs/update';
 const deleteJobUrl = '$baseUrl/jobs/delete';
 const getImageUrl = '$baseUrl/image';
 const postImageUrl = '$baseUrl/rental/upload';
+const getUserUrl = '$baseUrl/auth/getuser';
 const error404 = '404';
 const something = 'Something went wrong!!';
