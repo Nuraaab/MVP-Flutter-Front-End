@@ -3,6 +3,7 @@ import 'package:mvp_app/services/service.dart';
 
 import '../constant/styles/colors.dart';
 import '../constant/styles/fonts.dart';
+import '../widgets/widgets.dart';
 class EditJobs extends StatefulWidget {
   final String title;
   final String description;
@@ -75,32 +76,8 @@ class _EditJobsState extends State<EditJobs> {
                   ),
 
                   SizedBox(height: 16.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _titleController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.format_size , color: MyColors.iconColor,),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'Job Name',
-                        hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                      ),
-                    ),
-                  ),
+                  Widgets.TextFildWidget(_titleController, 'Job Name', TextInputType.text, false),
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -124,32 +101,8 @@ class _EditJobsState extends State<EditJobs> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _locationController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.location_on_rounded , color: MyColors.iconColor,),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'Location',
-                        hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                      ),
-                    ),
-                  ),
+                  Widgets.TextFildWidget(_locationController, 'Location', TextInputType.text, false),
+
                   SizedBox(height: 16.0),
                   Padding(
                     padding: const EdgeInsets.all( 8.0),

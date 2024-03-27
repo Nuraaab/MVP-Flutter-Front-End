@@ -15,7 +15,6 @@ class _PostJobsState extends State<PostJobs> {
   TextEditingController _titleController = new TextEditingController();
   TextEditingController _descriptionController = new TextEditingController();
   TextEditingController _locationController = new TextEditingController();
-  TextEditingController _salaryController = new TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -133,32 +132,7 @@ class _PostJobsState extends State<PostJobs> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _salaryController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.attach_money , color: MyColors.iconColor,),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'Salary',
-                        hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                      ),
-                    ),
-                  ),
+
                   SizedBox(height: 16.0),
                   Padding(
                     padding: const EdgeInsets.all( 8.0),

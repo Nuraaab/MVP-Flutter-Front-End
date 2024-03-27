@@ -41,6 +41,7 @@ class _JobPositionsState extends State<JobPositions> {
     return SingleChildScrollView(
       child: ListView.separated(
         shrinkWrap: true,
+          physics: NeverScrollableScrollPhysics(),
           itemBuilder: (context, index){
             String originalDate = widget.list[index].createdAt;
             DateTime dateTime = DateTime.parse(originalDate);

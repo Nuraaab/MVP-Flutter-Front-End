@@ -82,33 +82,9 @@ class _EditHousesState extends State<EditHouses> {
                   ),
 
                   SizedBox(height: 16.0),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _titleController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.format_size , color: MyColors.iconColor,),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'House Name',
-                        hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                      ),
-                    ),
-                  ),
+
                   Widgets.TextFildWidget(_titleController, 'House Name', TextInputType.text, false),
+
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Container(
@@ -132,58 +108,9 @@ class _EditHousesState extends State<EditHouses> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _locationController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.location_on_rounded , color: MyColors.iconColor,),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'Location',
-                        hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      controller: _priceController,
-                      obscureText: false,
-                      keyboardType: TextInputType.text,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.attach_money , color: MyColors.iconColor,),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: const BorderSide(
-                            color: MyColors.textColor1,
-                          ),
-                          borderRadius: BorderRadius.circular(35),
-                        ),
-                        contentPadding: EdgeInsets.all(10),
-                        hintText: 'Price',
-                        hintStyle: const TextStyle(fontSize: 14, color: MyColors.textColor1),
-                      ),
-                    ),
-                  ),
+                  Widgets.TextFildWidget(_locationController, 'Location', TextInputType.text, false),
+                  Widgets.TextFildWidget(_priceController, 'Price', TextInputType.text, false),
+
                   SizedBox(height: 16.0),
                   Padding(
                     padding: const EdgeInsets.all( 8.0),

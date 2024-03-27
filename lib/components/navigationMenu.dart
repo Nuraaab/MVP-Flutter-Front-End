@@ -44,8 +44,6 @@ class _NavigationMenuState extends State<NavigationMenu> {
         _user = userList;
       });
     }else{
-      snackBar.show(
-          context,"${userResponse.message}", Colors.red);
     }
   }
    logoutUser(context) async {
