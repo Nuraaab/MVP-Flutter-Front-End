@@ -11,7 +11,6 @@ class snackBar {
 
   static show(BuildContext context, String msg, Color clr) async{
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? isEnglish =prefs.getBool('isEnglish');
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       elevation: 0.0,
       backgroundColor: clr,

@@ -42,12 +42,12 @@ class _RegisterState extends State<Register> {
         child: Column(
           children: [
             SizedBox(height: 15,),
-            Widgets.TextFildWidget(_nameController, 'Name', TextInputType.text, false),
-            Widgets.TextFildWidget(_phoneController, 'Phone Number', TextInputType.text, false),
-            Widgets.TextFildWidget(_addressController, 'Address', TextInputType.text, false),
-            Widgets.TextFildWidget(_emailController, 'Email', TextInputType.emailAddress, false),
-            Widgets.TextFildWidget(_passwordController, 'Password', TextInputType.text, true),
-             Widgets.TextFildWidget(_confirmPasswordController, 'Confirm Password',TextInputType.text, true),
+            Widgets.TextFildWidget(_nameController, 'Name', TextInputType.text, false, Icons.person),
+            Widgets.TextFildWidget(_phoneController, 'Phone Number', TextInputType.text, false, Icons.call),
+            Widgets.TextFildWidget(_addressController, 'Address', TextInputType.text, false, Icons.location_city),
+            Widgets.TextFildWidget(_emailController, 'Email', TextInputType.emailAddress, false, Icons.mail),
+            Widgets.TextFildWidget(_passwordController, 'Password', TextInputType.text, true, Icons.lock),
+             Widgets.TextFildWidget(_confirmPasswordController, 'Confirm Password',TextInputType.text, true, Icons.lock),
             SizedBox(height: 10,),
             Padding(
               padding: const EdgeInsets.all( 8.0),

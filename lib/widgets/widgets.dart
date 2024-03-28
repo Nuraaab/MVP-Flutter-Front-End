@@ -25,7 +25,7 @@ class Widgets{
     );
   }
 
- static Widget TextFildWidget(controller, hint, type, isPass){
+ static Widget TextFildWidget(controller, hint, type, isPass, IconData leadingIcon){
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
@@ -33,7 +33,7 @@ class Widgets{
         obscureText: isPass,
         keyboardType: type,
         decoration: InputDecoration(
-          prefixIcon: const Icon(Icons.lock , color: MyColors.iconColor,),
+          prefixIcon:  Icon(leadingIcon , color: MyColors.iconColor,),
           enabledBorder: OutlineInputBorder(
             borderSide: const BorderSide(
               color: MyColors.textColor1,

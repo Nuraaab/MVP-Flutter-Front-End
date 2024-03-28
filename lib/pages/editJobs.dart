@@ -76,7 +76,7 @@ class _EditJobsState extends State<EditJobs> {
                   ),
 
                   SizedBox(height: 16.0),
-                  Widgets.TextFildWidget(_titleController, 'Job Name', TextInputType.text, false),
+                  Widgets.TextFildWidget(_titleController, 'Job Name', TextInputType.text, false, Icons.title),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -101,7 +101,7 @@ class _EditJobsState extends State<EditJobs> {
                       ),
                     ),
                   ),
-                  Widgets.TextFildWidget(_locationController, 'Location', TextInputType.text, false),
+                  Widgets.TextFildWidget(_locationController, 'Location', TextInputType.text, false, Icons.location_on),
 
                   SizedBox(height: 16.0),
                   Padding(

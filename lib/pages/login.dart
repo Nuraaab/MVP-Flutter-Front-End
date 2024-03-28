@@ -42,8 +42,8 @@ class _LoginState extends State<Login> {
               color: Colors.grey[400],
             ),
             SizedBox(height: 15,),
-            Widgets.TextFildWidget(_emailController, 'Email', TextInputType.emailAddress, false),
-            Widgets.TextFildWidget(_passwordController, 'Password', TextInputType.text, true),
+            Widgets.TextFildWidget(_emailController, 'Email', TextInputType.emailAddress, false, Icons.mail),
+            Widgets.TextFildWidget(_passwordController, 'Password', TextInputType.text, true, Icons.lock),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [

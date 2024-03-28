@@ -83,7 +83,7 @@ class _EditHousesState extends State<EditHouses> {
 
                   SizedBox(height: 16.0),
 
-                  Widgets.TextFildWidget(_titleController, 'House Name', TextInputType.text, false),
+                  Widgets.TextFildWidget(_titleController, 'House Name', TextInputType.text, false, Icons.title),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -108,8 +108,8 @@ class _EditHousesState extends State<EditHouses> {
                       ),
                     ),
                   ),
-                  Widgets.TextFildWidget(_locationController, 'Location', TextInputType.text, false),
-                  Widgets.TextFildWidget(_priceController, 'Price', TextInputType.text, false),
+                  Widgets.TextFildWidget(_locationController, 'Location', TextInputType.text, false, Icons.location_on),
+                  Widgets.TextFildWidget(_priceController, 'Price', TextInputType.text, false, Icons.attach_money),
 
                   SizedBox(height: 16.0),
                   Padding(
