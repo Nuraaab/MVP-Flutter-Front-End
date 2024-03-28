@@ -46,11 +46,7 @@ class Service {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
       snackBar.show(
           context,"${userInfo.message}", Colors.green);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', userInfo.token ?? '');
-      prefs.setString('user_id', userInfo.user_id ?? '');
-      prefs.setBool('isLoggedIn', true);
-      prefs.setString('user', userInfo.data.toString() ?? '');
+
     }else{
       snackBar.show(
           context,"${userInfo.message}", Colors.red);
@@ -63,11 +59,7 @@ class Service {
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
       snackBar.show(
           context,"${loginResponse.message}", Colors.green);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('token', loginResponse.token ?? '');
-      prefs.setString('user_id', loginResponse.user_id ?? '');
-      prefs.setBool('isLoggedIn', true);
-      prefs.setString('user', loginResponse.data.toString() ?? '');
+
     }else{
       snackBar.show(
           context,"${loginResponse.message}", Colors.red);

@@ -108,7 +108,7 @@ class _PostListingState extends State<PostListing> {
             children: [
               ListTile(
             contentPadding: EdgeInsets.symmetric(horizontal: 20),
-                title: Text('Hello, $_name',style: MyText.subtitle(context)!
+                title: Text('Hello, ${_user[0].name}',style: MyText.subtitle(context)!
                     .copyWith(color: Colors.white)),
               subtitle: Text("Welcome! You can post your job and house listings here.", style: MyText.subtitle(context)!
                   .copyWith(color: Colors.white)),

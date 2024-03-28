@@ -67,10 +67,16 @@ Future<ApiResponse> registerUser(var body) async{
   );
   switch(response.statusCode){
     case 200:
+
       userResponse.data = json.decode(response.body)['user'];
       userResponse.token = json.decode(response.body)['token'];
       userResponse.message =json.decode(response.body)['message'];
       userResponse.user_id = json.decode(response.body)['user']['id'].toString();
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('token', userResponse.token ?? '');
+      prefs.setString('user_id', userResponse.user_id ?? '');
+      prefs.setBool('isLoggedIn', true);
+      prefs.setString('user', userResponse.data.toString() ?? '');
       break;
     default:
       userResponse.error = json.decode(response.body)['message'];
@@ -98,6 +104,11 @@ Future<ApiResponse> login(String? email, String? password) async {
         userResponse.token =json.decode(response.body)['token'];
         userResponse.message = json.decode(response.body)['message'];
         userResponse.user_id = json.decode(response.body)['user']['id'].toString();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('token', userResponse.token ?? '');
+        prefs.setString('user_id', userResponse.user_id ?? '');
+        prefs.setBool('isLoggedIn', true);
+        prefs.setString('user', userResponse.data.toString() ?? '');
         break;
       case 400:
         userResponse.error= json.decode(response.body)['message'];
@@ -277,11 +288,13 @@ Future<ApiResponse> deleteJob(String id) async {
   return deleteResponse;
 }
 
-Future<ApiResponse> updateProfile(String imageUrl, String? id) async{
+Future<ApiResponse> updateProfile(String imageUrl) async{
   ApiResponse profileResponse = ApiResponse();
   try{
     SharedPreferences  prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
+    String id =prefs.getString('user_id')?? '';
+    print('id : $id');
     final response = await http.post(Uri.parse('$editUserUrl/$id'),
       body: jsonEncode({"profile": imageUrl}),
       headers: {"Content-Type": "application/json", "Authorization": "Bearer $token"},

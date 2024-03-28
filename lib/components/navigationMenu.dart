@@ -29,6 +29,7 @@ class _NavigationMenuState extends State<NavigationMenu> {
     String userId = prefs.getString('user_id') ?? '';
     bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
     final storedData = prefs.getString('user') ?? '';
+    print('user id : ${userId}');
     setState(() {
       user_id = userId;
       _isLoggedIn = isLoggedIn;
@@ -74,9 +75,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
     setState(() {
       fileName = path!;
     });
-    print('path2: $fileName');
     var imageUrl = await Service.uploadImage(fileName);
-  ApiResponse  editResponse = await updateProfile(imageUrl, user_id);
+  ApiResponse  editResponse = await updateProfile(imageUrl);
   if(editResponse.error == null){
     snackBar.show(
         context,"${editResponse.message}", Colors.green);
@@ -149,7 +149,8 @@ class _NavigationMenuState extends State<NavigationMenu> {
                                       ),
                                       ),
                                       SizedBox(height: 10,),
-                                      Text(_name,
+                                      if(_user.isNotEmpty)
+                                      Text(_user[0].name,
                                           textAlign: TextAlign.center,
                                           style: MyText.body1(context)!.copyWith(
                                               color: Colors.white,
