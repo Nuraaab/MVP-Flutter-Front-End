@@ -71,12 +71,11 @@ class _NavigationMenuState extends State<NavigationMenu> {
     if (result == null) return;
     final files = result.files;
     final path = files[0].path;
-    print('path: $path');
     setState(() {
       fileName = path!;
     });
     var imageUrl = await Service.uploadImage(fileName);
-  ApiResponse  editResponse = await updateProfile(imageUrl);
+  ApiResponse  editResponse = await updateProfile(imageUrl.toString());
   if(editResponse.error == null){
     snackBar.show(
         context,"${editResponse.message}", Colors.green);

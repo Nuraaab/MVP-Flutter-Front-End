@@ -294,9 +294,8 @@ Future<ApiResponse> updateProfile(String imageUrl) async{
     SharedPreferences  prefs = await SharedPreferences.getInstance();
     String token = prefs.getString('token') ?? '';
     String id =prefs.getString('user_id')?? '';
-    print('id : $id');
     final response = await http.post(Uri.parse('$editUserUrl/$id'),
-      body: jsonEncode({"profile": imageUrl}),
+      body: jsonEncode({"profile": imageUrl.toString()}),
       headers: {"Content-Type": "application/json", "Authorization": "Bearer $token"},
     );
     switch(response.statusCode){
