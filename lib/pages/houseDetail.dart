@@ -28,7 +28,8 @@ class _HouseDetailState extends State<HouseDetail> {
     DateTime dateTime = DateTime.parse(originalDate);
     String formattedDate = DateFormat('MMM d, yyyy').format(dateTime);
     return Scaffold(
-      extendBodyBehindAppBar: true,
+
+
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
